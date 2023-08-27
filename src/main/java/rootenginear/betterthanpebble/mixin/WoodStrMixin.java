@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Mixin(value = Block.class, remap = false)
 public class WoodStrMixin {
     @Inject(method = "blockStrength", at = @At("HEAD"), cancellable = true)
-    private void woodHardness(EntityPlayer player, CallbackInfoReturnable<Float> cir) {
+    private void woodStrength(EntityPlayer player, CallbackInfoReturnable<Float> cir) {
         Block self = (Block) (Object) this;
 
         int[] logIDs = {Block.logOak.id, Block.logPine.id, Block.logBirch.id, Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id};

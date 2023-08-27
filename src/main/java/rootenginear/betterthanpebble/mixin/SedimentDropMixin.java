@@ -34,7 +34,7 @@ public class SedimentDropMixin {
     private final float chanceByFlint = 1.0F / gravelFlintChance / 10.0F;
 
     @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
-    private void pebbleDropCheck(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
+    private void sedimentBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
         Block self = (Block) (Object) this;
         float rand = new Random().nextFloat();
 

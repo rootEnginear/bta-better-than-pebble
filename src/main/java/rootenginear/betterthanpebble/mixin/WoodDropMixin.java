@@ -21,7 +21,7 @@ import java.util.Random;
 @Mixin(value = {Block.class}, remap = false)
 public class WoodDropMixin {
     @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
-    private void woodDropCheck(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
+    private void woodBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
         Block self = (Block) (Object) this;
 
         int[] logIDs = {Block.logOak.id, Block.logPine.id, Block.logBirch.id, Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id};

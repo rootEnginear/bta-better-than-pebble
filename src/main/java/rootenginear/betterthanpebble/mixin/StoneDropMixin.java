@@ -19,7 +19,7 @@ import java.util.Random;
 @Mixin(value = {BlockStone.class}, remap = false)
 public class StoneDropMixin {
     @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
-    private void stoneDropCheck(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
+    private void stoneBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
         switch (dropCause) {
             case WORLD:
             case EXPLOSION:
