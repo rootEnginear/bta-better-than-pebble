@@ -19,11 +19,18 @@ import java.util.Random;
 public class StoneDropMixin {
     @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
     private void stoneDropCheck(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
-        EntityPlayer player = Minecraft.getMinecraft(Minecraft.class).thePlayer;
-        ItemStack inHand = player.getCurrentEquippedItem();
+        switch (dropCause) {
+            case WORLD:
+            case EXPLOSION:
+                cir.setReturnValue(new ItemStack[]{new ItemStack(31415, new Random().nextInt(2) + 1, 0)});
+                break;
+            case PROPER_TOOL:
+                EntityPlayer player = Minecraft.getMinecraft(Minecraft.class).thePlayer;
+                ItemStack inHand = player.getCurrentEquippedItem();
 
-        if (inHand != null && inHand.getItem() instanceof Rock) {
-            cir.setReturnValue(new ItemStack[]{new ItemStack(31415, new Random().nextInt(2) + 1, 0)});
+                if (inHand != null && inHand.getItem() instanceof Rock) {
+                    cir.setReturnValue(new ItemStack[]{new ItemStack(31415, new Random().nextInt(2) + 1, 0)});
+                }
         }
     }
 }
