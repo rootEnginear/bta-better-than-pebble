@@ -48,7 +48,7 @@ public class SedimentDropMixin {
             return;
         }
 
-        if ((self.id == Block.dirtScorched.id || self.id == Block.dirtScorchedRich.id) && rand < richDirtChance * chanceByFlint) {
+        if ((self.id == Block.dirtScorched.id || self.id == Block.dirtScorchedRich.id || self.id == Block.grassScorched.id) && rand < richDirtChance * chanceByFlint) {
             cir.setReturnValue(new ItemStack[]{new ItemStack(Item.ammoPebble, new Random().nextInt(4) + 1)});
             return;
         }
