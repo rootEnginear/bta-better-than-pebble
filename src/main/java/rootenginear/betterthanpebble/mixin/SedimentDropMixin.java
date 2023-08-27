@@ -1,6 +1,9 @@
 package rootenginear.betterthanpebble.mixin;
 
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockGrass;
+import net.minecraft.core.block.BlockGrassScorched;
+import net.minecraft.core.block.BlockGravel;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.Item;
@@ -14,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
-@Mixin(value = Block.class, remap = false)
-public class PebbleDropMixin {
+@Mixin(value = {Block.class, BlockGravel.class, BlockGrass.class, BlockGrassScorched.class}, remap = false)
+public class SedimentDropMixin {
 
     @Unique
     private final float gravelFlintChance = 39.8F;
