@@ -11,7 +11,7 @@ import turniplabs.halplibe.helper.RecipeHelper;
 
 public class BetterThanPebble implements ModInitializer {
     public static final String MOD_ID = "betterthanpebble";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final int ITEM_ID = 31415;
 
     static {
         // Prevent Java compiler to remove unused import
@@ -19,8 +19,9 @@ public class BetterThanPebble implements ModInitializer {
         Item $2 = Item.olivine;
     }
 
-    public static final int ITEM_ID = 31415;
     public static final Item rockItem = ItemHelper.createItem(MOD_ID, new Rock(ITEM_ID), "rock", "rock.png");
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
