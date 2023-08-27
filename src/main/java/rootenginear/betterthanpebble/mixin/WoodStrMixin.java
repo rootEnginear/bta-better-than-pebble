@@ -12,7 +12,7 @@ import rootenginear.betterthanpebble.item.Rock;
 
 import java.util.Arrays;
 
-@Mixin(value = Block.class, remap = false)
+@Mixin(value = {Block.class}, remap = false)
 public class WoodStrMixin {
     @Inject(method = "blockStrength", at = @At("HEAD"), cancellable = true)
     private void woodStrength(EntityPlayer player, CallbackInfoReturnable<Float> cir) {
