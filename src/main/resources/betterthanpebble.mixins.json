@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "rootenginear.betterthanpebble.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PebbleDropMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
