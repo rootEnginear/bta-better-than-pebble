@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "better-than-pebble",
+  "id": "betterthanpebble",
   "version": "${version}",
   "name": "Better Than Pebble",
   "description": "This mod aims to help new BTA modders.",
