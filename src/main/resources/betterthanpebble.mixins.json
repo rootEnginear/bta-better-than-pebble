@@ -4,7 +4,10 @@
   "package": "rootenginear.betterthanpebble.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PebbleDropMixin"
+    "SedimentDropMixin",
+    "StoneDropMixin",
+    "StoneStrMixin",
+    "WoodStrMixin"
   ],
   "client": [],
   "injectors": {

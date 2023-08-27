@@ -5,6 +5,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rootenginear.betterthanpebble.item.Rock;
 import turniplabs.halplibe.helper.ItemHelper;
 import turniplabs.halplibe.helper.RecipeHelper;
 
@@ -19,7 +20,7 @@ public class BetterThanPebble implements ModInitializer {
     }
 
     public static final int ITEM_ID = 31415;
-    public static final Item rockItem = ItemHelper.createItem(MOD_ID, new Item(ITEM_ID), "rock", "rock.png");
+    public static final Item rockItem = ItemHelper.createItem(MOD_ID, new Rock("Rock", ITEM_ID).setMaxStackSize(64), "rock", "rock.png");
 
     @Override
     public void onInitialize() {
