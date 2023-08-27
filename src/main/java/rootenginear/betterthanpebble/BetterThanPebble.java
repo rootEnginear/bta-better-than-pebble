@@ -20,7 +20,7 @@ public class BetterThanPebble implements ModInitializer {
     }
 
     public static final int ITEM_ID = 31415;
-    public static final Item rockItem = ItemHelper.createItem(MOD_ID, new Rock("Rock", ITEM_ID).setMaxStackSize(64), "rock", "rock.png");
+    public static final Item rockItem = ItemHelper.createItem(MOD_ID, new Rock(ITEM_ID), "rock", "rock.png");
 
     @Override
     public void onInitialize() {

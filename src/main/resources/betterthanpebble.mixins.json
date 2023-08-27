@@ -6,7 +6,6 @@
   "mixins": [
     "SedimentDropMixin",
     "StoneDropMixin",
-    "StoneStrMixin",
     "WoodDropMixin",
     "WoodStrMixin"
   ],
