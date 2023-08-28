@@ -7,6 +7,7 @@ import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tool.ItemToolAxe;
+import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,28 +26,46 @@ public class WoodDropMixin {
         Block self = (Block) (Object) this;
 
         if (WoodUtils.isWood(self)) {
-            // Cancel wood drop, check via `onWoodDestroyedByPlayer`
-            cir.setReturnValue(null);
+            switch (dropCause) {
+                case WORLD:
+                case EXPLOSION:
+                    cir.setReturnValue(new ItemStack[]{new ItemStack(Item.stick, new Random().nextInt(5))});
+                    break;
+                case PROPER_TOOL:
+                    // Cancel wood drop, check via `onWoodDestroyedByPlayer`
+                    cir.setReturnValue(null);
+            }
         }
     }
 
     @Inject(method = "onBlockDestroyedByPlayer", at = @At("HEAD"))
     private void onWoodDestroyedByPlayer(World world, int x, int y, int z, int meta, EntityPlayer player, Item item, CallbackInfo ci) {
+        if (player.getGamemode() == Gamemode.creative) return;
+
         Block self = (Block) (Object) this;
+        if (!player.canHarvestBlock(self) || !WoodUtils.isWood(self)) return;
 
-        if (WoodUtils.isWood(self)) {
-            ItemStack inHand = player.getCurrentEquippedItem();
+        // Has PROPER_TOOL
+        ItemStack inHand = player.getCurrentEquippedItem();
 
-            if (inHand != null && ((inHand.getItem() instanceof ItemToolAxe) || (inHand.getItem() instanceof Rock))) {
-                // Drop wood if cut by axe or rock
+        if (inHand != null) {
+            Item heldItem = inHand.getItem();
+
+            // If Silk, Skip drop (Handled in `woodBreakResult`)
+            if (heldItem.isSilkTouch()) return;
+
+            // If Other Axe, Drops Wood
+            if (heldItem instanceof ItemToolAxe || heldItem instanceof Rock) {
                 if (!world.isClientSide) {
                     world.dropItem(x, y, z, new ItemStack(self));
-                }
-            } else {
-                if (!world.isClientSide) {
-                    world.dropItem(x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
+                    return;
                 }
             }
+        }
+
+        // Normal Drop
+        if (!world.isClientSide) {
+            world.dropItem(x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
         }
     }
 }
