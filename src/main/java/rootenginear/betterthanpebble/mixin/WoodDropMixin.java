@@ -1,6 +1,7 @@
 package rootenginear.betterthanpebble.mixin;
 
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLog;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
@@ -16,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import rootenginear.betterthanpebble.item.Rock;
 import rootenginear.betterthanpebble.utils.DropItemUtils;
-import rootenginear.betterthanpebble.utils.WoodUtils;
 
 import java.util.Random;
 
@@ -26,7 +26,7 @@ public class WoodDropMixin {
     private void woodBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
         Block self = (Block) (Object) this;
 
-        if (WoodUtils.isWood(self)) {
+        if (self instanceof BlockLog) {
             switch (dropCause) {
                 case WORLD:
                 case EXPLOSION:
@@ -44,7 +44,7 @@ public class WoodDropMixin {
         if (player.getGamemode() == Gamemode.creative) return;
 
         Block self = (Block) (Object) this;
-        if (!player.canHarvestBlock(self) || !WoodUtils.isWood(self)) return;
+        if (!player.canHarvestBlock(self) || !(self instanceof BlockLog)) return;
 
         // Has PROPER_TOOL
         ItemStack inHand = player.getCurrentEquippedItem();
