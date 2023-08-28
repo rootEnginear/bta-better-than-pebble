@@ -1,7 +1,7 @@
 # Better Than Pebble
 
-This mod challenges you to rethink about the starting progression of Minecraft. What you would do if wooden tools are
-**no longer craftable?** What about you cannot get wood **with you bare hand?**
+Introducing the wooden tool alternative and reimagining the starting progression of Minecraft. What would you do if
+wooden tools were **no longer craftable?** How about you **cannot get wood with your bare hand?**
 
 ## Features
 
