@@ -1,4 +1,4 @@
-package rootenginear.betterthanpebble.utils;
+package rootenginear.betterthanpebble.stuct;
 
 public class SedimentData {
     public float chance;
