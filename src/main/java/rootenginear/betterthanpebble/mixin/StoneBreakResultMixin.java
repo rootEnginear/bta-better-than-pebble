@@ -23,6 +23,7 @@ public class StoneBreakResultMixin {
                 cir.setReturnValue(new ItemStack[]{new ItemStack(BetterThanPebble.rockItem, new Random().nextInt(2) + 1)});
                 break;
             case PROPER_TOOL:
+                // Cancel proper stone drop, check via `onStoneDestroyedByPlayer`
                 cir.setReturnValue(null);
         }
     }
