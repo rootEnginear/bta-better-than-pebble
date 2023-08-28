@@ -11,7 +11,7 @@ import turniplabs.halplibe.helper.RecipeHelper;
 
 public class BetterThanPebble implements ModInitializer {
     public static final String MOD_ID = "betterthanpebble";
-    public static final int ITEM_ID = 31415;
+    public static final int ITEM_ID = 32750;
 
     static {
         // Prevent Java compiler to remove unused import
