@@ -1,10 +1,7 @@
 # Better Than Pebble
 
-What your first 10 minutes of Minecraft is? Punch a tree, get some wood, make a crafting table, make some tools, and
-start mining, isn't it? **— So Predictable and Boring**
-
-What you would do if wooden tools are **no longer craftable?** What about you cannot get wood **with you bare hand?** —
-This mod challenges you to be resourceful and rethink about the starting progression of Minecraft.
+This mod challenges you to rethink about the starting progression of Minecraft. What you would do if wooden tools are
+**no longer craftable?** What about you cannot get wood **with you bare hand?**
 
 ## Features
 
@@ -12,7 +9,8 @@ This mod challenges you to be resourceful and rethink about the starting progres
 - Punching wood will take more time and yield 0–4 sticks instead of wood.
 - Sand, Gravel, Scorched Dirt, Rich Scorched Dirt, Scorched Grass, Dirt, Retro Grass, and Grass will have _small
   chances_ to drop some pebbles.
-- New item: Rock
+- New item: **Rock**
+    - Better than pebble.
     - Can be used to get wood and mine stone.
     - Has slightly more damage than bare hand.
 - New crafting recipes:
