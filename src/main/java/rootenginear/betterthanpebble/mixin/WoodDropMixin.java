@@ -1,6 +1,5 @@
 package rootenginear.betterthanpebble.mixin;
 
-import net.minecraft.core.achievement.stat.StatList;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -21,42 +20,33 @@ import java.util.Random;
 
 @Mixin(value = {Block.class}, remap = false)
 public class WoodDropMixin {
-    @Inject(method = "harvestBlock", at = @At("HEAD"), cancellable = true)
-    private void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfo ci) {
+    @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
+    private void woodBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
         Block self = (Block) (Object) this;
 
-        int[] logIDs = {Block.logOak.id, Block.logPine.id, Block.logBirch.id, Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id};
+        final int[] LOG_IDS = {Block.logOak.id, Block.logPine.id, Block.logBirch.id, Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id};
 
-        if (Arrays.stream(logIDs).anyMatch(Integer.valueOf(self.id)::equals)) {
-            ItemStack heldItemStack = entityplayer.inventory.getCurrentItem();
-            Item heldItem = heldItemStack != null ? Item.itemsList[heldItemStack.itemID] : null;
-
-            // If the player's hand is empty OR don't has proper tools
-            if (!(heldItem instanceof ItemToolAxe) && !(heldItem instanceof Rock)) {
-                entityplayer.addStat(StatList.mineBlockStatArray[self.id], 1);
-
-                // dropBlockWithCause
-                if (!world.isClientSide) {
-                    ItemStack[] drops = new ItemStack[]{new ItemStack(Item.stick, new Random().nextInt(5))};
-                    for (ItemStack drop : drops) {
-                        for (int i = 0; i < drop.stackSize; ++i) {
-                            world.dropItem(x, y, z, new ItemStack(drop.itemID, 1, drop.getMetadata(), drop.tag));
-                        }
-                    }
-                }
-
-                ci.cancel();
-            }
+        if (Arrays.stream(LOG_IDS).anyMatch(Integer.valueOf(self.id)::equals)) {
+            // Cancel wood drop, check via `onWoodDestroyedByPlayer`
+            cir.setReturnValue(null);
         }
     }
 
-    @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
-    private void stoneBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
-        switch (dropCause) {
-            case WORLD:
-            case EXPLOSION:
-            case IMPROPER_TOOL:
-                cir.setReturnValue(new ItemStack[]{new ItemStack(Item.stick, new Random().nextInt(5))});
+    @Inject(method = "onBlockDestroyedByPlayer", at = @At("HEAD"))
+    private void onWoodDestroyedByPlayer(World world, int x, int y, int z, int meta, EntityPlayer player, Item item, CallbackInfo ci) {
+        Block self = (Block) (Object) this;
+
+        final int[] LOG_IDS = {Block.logOak.id, Block.logPine.id, Block.logBirch.id, Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id};
+
+        if (Arrays.stream(LOG_IDS).anyMatch(Integer.valueOf(self.id)::equals)) {
+            ItemStack inHand = player.getCurrentEquippedItem();
+
+            if (inHand != null && ((inHand.getItem() instanceof ItemToolAxe) || (inHand.getItem() instanceof Rock))) {
+                // Drop wood if cut by axe or rock
+                world.dropItem(x, y, z, new ItemStack(self));
+            } else {
+                world.dropItem(x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
+            }
         }
     }
 }
