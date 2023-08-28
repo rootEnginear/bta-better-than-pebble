@@ -1,36 +1,27 @@
-# Example Mod
+# Better Than Pebble
 
-Template for making Babric mods for BTA!
+What your first 10 minutes of Minecraft is? Punch a tree, get some wood, make a crafting table, make some tools, and
+start mining, isn't it? **— So Predictable and Boring**
 
-**Note: *DO NOT fork this repository unless you want to contribute!***
+What you would do if wooden tools are **no longer craftable?** What about you cannot get wood **with you bare hand?** —
+This mod challenges you to be resourceful and rethink about the starting progression of Minecraft.
 
-## Prerequisites
-- JDK for Java 17 ([Eclipse Temurin](https://adoptium.net/temurin/releases/) recommended)
-- IntelliJ IDEA
-- Minecraft Development plugin (Optional, but highly recommended)
+## Features
 
-## Setup instructions
-   
+- Wooden tools are _uncraftable_.
+- Punching wood will take more time and yield 0–4 sticks instead of wood.
+- Sand, Gravel, Scorched Dirt, Rich Scorched Dirt, Scorched Grass, Dirt, Retro Grass, and Grass will have _small
+  chances_ to drop some pebbles.
+- New item: Rock
+    - Can be used to get wood and mine stone.
+    - Has slightly more damage than bare hand.
+- New crafting recipes:
+    - 4 pebbles (2x2) = 1 rock
+    - 4 rocks (2x2) = 1 cobblestone
 
-1. Click the `Use this template` button on this repo's page above. Choose `Create a new respository`, you will be redirected to a new page. Enter your repo's name and description, and hit `Create repository`.  
-   To get your project, open IntelliJ IDEA and click `Get from VCS`. Select `Repository URL` and enter your repo's url
+> Existing wooden tools will not be removed
 
-2. After the project has finished importing, close it and open it again.  
-   If that does not work, open the right sidebar with `Gradle` on it, open `Tasks` > `fabric` and run `ideaSyncTask`.
+## Dependencies
 
-3. Create a new run configuration by going in `Run > Edit Configurations`.  
-   Then click on the plus icon and select Gradle. In the `Tasks and Arguments` field enter `build`.  
-   Running it will build your finished jar files and put them in `build/libs/`.
-
-4. While in the same place, select the Client and Server run configurations and edit the VM options under the SDK selection.
-
-   ![image](https://github.com/Turnip-Labs/bta-example-mod/assets/58854399/2d45551d-83e3-4a75-b0e6-acdbb95b8114)  
-
-   Click the double arrow icon to expand the list, and append `-Dfabric.gameVersion=1.7.7.0` to the end.  
-
-   ![image](https://github.com/Turnip-Labs/bta-example-mod/assets/58854399/e4eb8a22-d88a-41ef-8fb2-e37c66e18585)
-
-5. Lastly, open `File` > `Settings` and head to `Build, Execution, Development` > `Build Tools` > `Gradle`.  
-   Make sure `Build and run using` and `Run tests using` is set to `Gradle`.
-
-6. Done! Now, all that's left is to change every mention of `examplemod` and `turniplabs` to your own mod id and mod group, respectively. Happy modding!
+- [Better Than Adventure 1.7.7.0_01 with Babric](https://github.com/Turnip-Labs/babric-instance-repo/releases)
+- [HalpLibe >=2.1.5](https://github.com/Turnip-Labs/bta-halplibe)
