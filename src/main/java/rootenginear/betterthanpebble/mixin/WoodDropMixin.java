@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import rootenginear.betterthanpebble.item.Rock;
+import rootenginear.betterthanpebble.utils.DropItemUtils;
 import rootenginear.betterthanpebble.utils.WoodUtils;
 
 import java.util.Random;
@@ -56,16 +57,12 @@ public class WoodDropMixin {
 
             // If Other Axe, Drops Wood
             if (heldItem instanceof ItemToolAxe || heldItem instanceof Rock) {
-                if (!world.isClientSide) {
-                    world.dropItem(x, y, z, new ItemStack(self));
-                    return;
-                }
+                DropItemUtils.WorldDropItem(world, x, y, z, new ItemStack(self));
+                return;
             }
         }
 
         // Normal Drop
-        if (!world.isClientSide) {
-            world.dropItem(x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
-        }
+        DropItemUtils.WorldDropItem(world, x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
     }
 }

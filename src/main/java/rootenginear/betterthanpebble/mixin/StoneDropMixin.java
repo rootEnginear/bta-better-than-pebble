@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import rootenginear.betterthanpebble.BetterThanPebble;
+import rootenginear.betterthanpebble.utils.DropItemUtils;
 
 import java.util.Random;
 
@@ -35,16 +36,12 @@ public class StoneDropMixin {
 
             // If Other Pick, Drops Cobble
             if (heldItem instanceof ItemToolPickaxe) {
-                if (!world.isClientSide) {
-                    world.dropItem(x, y, z, new ItemStack(((BlockStone) self).cobblestone));
-                    return;
-                }
+                DropItemUtils.WorldDropItem(world, x, y, z, new ItemStack(((BlockStone) self).cobblestone));
+                return;
             }
         }
 
         // Normal Drop
-        if (!world.isClientSide) {
-            world.dropItem(x, y, z, new ItemStack(BetterThanPebble.rockItem, new Random().nextInt(2) + 1));
-        }
+        DropItemUtils.WorldDropItem(world, x, y, z, new ItemStack(BetterThanPebble.rockItem, new Random().nextInt(2) + 1));
     }
 }
