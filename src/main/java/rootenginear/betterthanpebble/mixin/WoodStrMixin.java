@@ -9,8 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import rootenginear.betterthanpebble.item.Rock;
-
-import java.util.Arrays;
+import rootenginear.betterthanpebble.utils.WoodUtils;
 
 @Mixin(value = {Block.class}, remap = false)
 public class WoodStrMixin {
@@ -18,9 +17,7 @@ public class WoodStrMixin {
     private void woodStrength(EntityPlayer player, CallbackInfoReturnable<Float> cir) {
         Block self = (Block) (Object) this;
 
-        int[] logIDs = {Block.logOak.id, Block.logPine.id, Block.logBirch.id, Block.logCherry.id, Block.logEucalyptus.id, Block.logOakMossy.id};
-
-        if (Arrays.stream(logIDs).anyMatch(Integer.valueOf(self.id)::equals)) {
+        if (WoodUtils.isWood(self)) {
             ItemStack inHand = player.getCurrentEquippedItem();
 
             if (inHand != null && (inHand.getItem() instanceof ItemToolAxe || inHand.getItem() instanceof Rock)) {
