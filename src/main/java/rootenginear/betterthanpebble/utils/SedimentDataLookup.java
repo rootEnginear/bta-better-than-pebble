@@ -18,14 +18,14 @@ public class SedimentDataLookup {
     public static final Map<Integer, SedimentData> sedimentLookup = new HashMap<>();
 
     static {
-        sedimentLookup.put(Block.sand.id, new SedimentData(sandChance, false, 4));
-        sedimentLookup.put(Block.gravel.id, new SedimentData(gravelChance, true, 5));
-        sedimentLookup.put(Block.dirtScorched.id, new SedimentData(scorchedDirtChance, false, 4));
-        sedimentLookup.put(Block.dirtScorchedRich.id, new SedimentData(scorchedDirtChance, false, 4));
-        sedimentLookup.put(Block.grassScorched.id, new SedimentData(scorchedDirtChance, true, 4));
-        sedimentLookup.put(Block.dirt.id, new SedimentData(dirtChance, false, 2));
-        sedimentLookup.put(Block.grassRetro.id, new SedimentData(dirtChance, false, 2));
-        sedimentLookup.put(Block.grass.id, new SedimentData(dirtChance, true, 2));
+        sedimentLookup.put(Block.sand.id, new SedimentData(sandChance, 4));
+        sedimentLookup.put(Block.gravel.id, new SedimentData(gravelChance, 5));
+        sedimentLookup.put(Block.dirtScorched.id, new SedimentData(scorchedDirtChance, 4));
+        sedimentLookup.put(Block.dirtScorchedRich.id, new SedimentData(scorchedDirtChance, 4));
+        sedimentLookup.put(Block.grassScorched.id, new SedimentData(scorchedDirtChance, 4));
+        sedimentLookup.put(Block.dirt.id, new SedimentData(dirtChance, 2));
+        sedimentLookup.put(Block.grassRetro.id, new SedimentData(dirtChance, 2));
+        sedimentLookup.put(Block.grass.id, new SedimentData(dirtChance, 2));
     }
 
     public static SedimentData getSedimentData(Block block) {

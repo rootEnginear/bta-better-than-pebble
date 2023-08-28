@@ -22,14 +22,13 @@ import java.util.Random;
 public class SedimentDropMixin {
     @Inject(method = "getBreakResult", at = @At("HEAD"), cancellable = true)
     private void sedimentBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfoReturnable<ItemStack[]> cir) {
-        Block self = (Block) (Object) this;
+        if (dropCause == EnumDropCause.PICK_BLOCK || dropCause == EnumDropCause.SILK_TOUCH) return;
 
+        Block self = (Block) (Object) this;
         SedimentData data = SedimentDataLookup.getSedimentData(self);
         if (data != null) {
             Random rand = new Random();
             if (rand.nextFloat() < data.chance) {
-                if (data.pickSilkCheck && (dropCause == EnumDropCause.PICK_BLOCK || dropCause == EnumDropCause.SILK_TOUCH))
-                    return;
                 cir.setReturnValue(new ItemStack[]{new ItemStack(Item.ammoPebble, rand.nextInt(data.maxDrop) + 1)});
             }
         }
