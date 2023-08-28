@@ -19,11 +19,13 @@ public class StoneDropMixin {
     @Inject(method = "onBlockDestroyedByPlayer", at = @At("HEAD"))
     private void onStoneDestroyedByPlayer(World world, int x, int y, int z, int meta, EntityPlayer player, Item item, CallbackInfo ci) {
         Block self = (Block) (Object) this;
-        
+
         if (self.id == Block.stone.id) {
             ItemStack inHand = player.getCurrentEquippedItem();
             if (inHand != null && inHand.getItem() instanceof Rock) {
-                world.dropItem(x, y, z, new ItemStack(BetterThanPebble.rockItem, new Random().nextInt(2) + 1));
+                if (!world.isClientSide) {
+                    world.dropItem(x, y, z, new ItemStack(BetterThanPebble.rockItem, new Random().nextInt(2) + 1));
+                }
             }
         }
     }

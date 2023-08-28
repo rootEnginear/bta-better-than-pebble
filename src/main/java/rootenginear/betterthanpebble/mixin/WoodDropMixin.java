@@ -43,9 +43,13 @@ public class WoodDropMixin {
 
             if (inHand != null && ((inHand.getItem() instanceof ItemToolAxe) || (inHand.getItem() instanceof Rock))) {
                 // Drop wood if cut by axe or rock
-                world.dropItem(x, y, z, new ItemStack(self));
+                if (!world.isClientSide) {
+                    world.dropItem(x, y, z, new ItemStack(self));
+                }
             } else {
-                world.dropItem(x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
+                if (!world.isClientSide) {
+                    world.dropItem(x, y, z, new ItemStack(Item.stick, new Random().nextInt(5)));
+                }
             }
         }
     }
